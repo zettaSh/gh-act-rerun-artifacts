@@ -1,0 +1,16 @@
+name: Upload Artifacts
+
+on: push
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+    - run: env
+    - run: mkdir -p artifacts/texts
+    - run: echo $GITHUB_SHA >> artifacts/texts/sha.txt
+    - run: echo `date +%c` >> artifacts/texts/sha.txt
+    - uses: actions/upload-artifact@v3
+      with:
+        name: sha_txt
+        path: artifacts/texts/sha.txt
